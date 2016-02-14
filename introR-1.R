@@ -4,5 +4,7 @@
 # ----------------------------------------------------------
 
 source("suppl-functions.R")
-EnsurePackage("digest")
-EnsurePackage("curl")
+EnsurePackage("swirl")
+swirl()
+
+1: R Programming: The basics of programming in R

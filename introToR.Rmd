@@ -1,0 +1,54 @@
+---
+title: "introToR"
+author: "PN"
+date: "14. Februar 2016"
+output: html_document
+---
+
+# 1. Was ist R?
+
+__R ist eine Programmiersprache__ 
+  
+__Zentrale Strukturen:__
+
+  * Objekte (z.B. Variablen)
+    *	Typ (`mode()`; siehe auch `str()`): numeric, character, boolean, factor
+    *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datennstruktur nicht zur Funktion passt!*
+  * Operatoren (z.B. Zuordnung: `x <- 5`)
+  * Funktionen (z.B. `'+'(4,5)`)
+    * Funktionsparameter
+
+# 2. RStudio
+
+__1. Konsole__
+
+  * Taschenrechner (`4+4`)
+
+__2. Skript__
+
+__3. Workspace / History / GIT__
+
+  * *Viele Probleme sind auf unbeabsichtigte Objekte im Workspace zurükzuführen.*
+    *  `rm(list=ls())` --> Säubern des Workspace
+    * erfordert mehr Mikromanagement als SPSS
+  
+__4. Files / Plots / Packages /Help__
+
+  *	Working Directory beachten (`setwd()`)
+  * Hilfe (`?lm`)
+	* Packages / Libraries
+    * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packages
+    * Um diese nutzen zu können:`get.packages()` & `library()`
+    
+# 3. Datenstrukturen
+
+__1. Skalare__
+`x <- 5`
+
+__2. Vektoren__
+`x <- c(5,4,5)
+__3. Matrizen__
+__4. Dataframes__
+__5. Listen__
+
+# 4. Datenmanipulation mit dply
