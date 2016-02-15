@@ -2,21 +2,26 @@
 title: "introToR"
 author: "PN"
 date: "14. Februar 2016"
-output: html_document
+output: 
+  beamer_presentation: 
+    colortheme: whale
 ---
 
 # 1. Was ist R?
 
-__R ist eine Programmiersprache__ 
+## R ist eine Programmiersprache
   
-__Zentrale Strukturen:__
+## Zentrale Strukturen
 
-  * Objekte (z.B. Variablen)
-    *	Typ (`mode()`; siehe auch `str()`): numeric, character, boolean, factor
-    *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datennstruktur nicht zur Funktion passt!*
+  * Datenstrukturen & Datentyp (z.B. Variablen)
+    *	Datentyp (`mode()`): numeric, character, boolean, factor
+    * Datenstruktur (`str()`)
+    *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datennstruktur nicht zur Funktion passen!*
   * Operatoren (z.B. Zuordnung: `x <- 5`)
   * Funktionen (z.B. `'+'(4,5)`)
     * Funktionsparameter
+
+## Pädagogische Zugänge
 
 # 2. RStudio
 
@@ -31,11 +36,13 @@ __3. Workspace / History / GIT__
   * *Viele Probleme sind auf unbeabsichtigte Objekte im Workspace zurükzuführen.*
     *  `rm(list=ls())` --> Säubern des Workspace
     * erfordert mehr Mikromanagement als SPSS
+
+# 2. RStudio
   
 __4. Files / Plots / Packages /Help__
 
   *	Working Directory beachten (`setwd()`)
-  * Hilfe (`?lm`)
+  * Hilfe (`?`; z.B. `?lm`)
 	* Packages / Libraries
     * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packages
     * Um diese nutzen zu können:`get.packages()` & `library()`
@@ -44,8 +51,10 @@ __4. Files / Plots / Packages /Help__
 
 ## 3.1 Homogene Datenstrukturen
 
+Homogene Datenstrukturen enthalten nur einen Datentyp.
+
 __1. Skalare__
-```{r}
+```{r eval=FALSE}
 s <- 5
 s
 str(s)
@@ -53,21 +62,27 @@ s + 4
 s * 2
 ```
 
+# 3. Datenstrukturen
+
+## 3.1 Homogene Datenstrukturen
 
 __2. Vektoren__
-```{r}
+```{r eval=FALSE}
 v <- c(5,4,5)
 v
 str(v)
 v + 4
 v * 2
-# Get 3rd element:
+# get 3rd element:
 v[3]
-
 ```
 
+# 3. Datenstrukturen
+
+## 3.1 Homogene Datenstrukturen
+
 __3. Matrizen__
-```{r}
+```{r eval=FALSE}
 m1 <- matrix(c(1,123,4,12,3,5), nrow=2)
 m1
 str(m1)
@@ -78,15 +93,19 @@ m2
 str(m2)
 # get 2nd element in 1st row:
 m2[1,2]
-# get 2nd row:
+# get 2nd column:
 m2[,2]
 
 ```
 
+# 3. Datenstrukturen
+
 ## 3.2 Heterogene Datenstrukturen
 
+Datenstruktur mit potentiell unterschiedlichen Datentypen.
+
 __1. Data frames__
-```{r}
+```{r eval=FALSE}
 subject <- c(2,3,4)
 condition <- as.factor(c("EG","KG","EG"))
 dv <-  c(5,5,5)
@@ -94,23 +113,84 @@ df <- data.frame(subject, condition, dv)
 df
 str(df)
 
-#get values on dv:
+# get values on dv:
 df$dv
-#get values of subject 3:
+# alternatively
+df[,3]
+# get values of subject 3:
 df[df$subject==3,]
+# alternatively
+df[2,]
 ```
 
 * Data frames sind die Struktur in der unsere Daten normalerweiser oganisiert sind.
 
+> TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.
+
+<!-- df[3,2]-->
+<!-- df[df$subject==4,names(df)]-->
+
+# 3. Datenstrukturen
+
+## 3.2 Heterogene Datenstrukturen
+
 __2. Listen__
-```{r}
+```{r eval=FALSE}
 l <- list(c("a", "b", "c"), c(1,2,3,4), c(TRUE, FALSE, TRUE))
 l
 str(l)
+
+# get 1st value of 3rd object in list
+l[[3]][1]
+
 ```
 * Viele Outputs von statistischen Funktionen sind Listen.
 
-# 4. Datenmanipulatio
+__Das Verständnis über den Zugriff auf und die Organisation von den verschiedenen Datenstrukturen ist essentiell für das Arbeiten mit R.__
+
+# 4. Funktionen
+
+*Funktionen sind Methoden mit denen wir unsere Daten manipulieren und analyiseren.*
+
+* Ein Funktion hat einen _Namen_ (z.B.: `mean`),
+* _Parameter_ bzw. _Argumente_ (z.B.: `c(1,2,3)`) und
+* einen _Rückgabewert_ (z.B.: `## [1] 2`).
+
+# 4. Funktionen
+
+```{r eval=FALSE}
+x <- c(1:10)
+x
+# Calculate mean of x
+mean(x) # That's a function call and x is a function parameter/argument
+# However, `mean` may have more parameters. Try ?mean
+```
+
+> TODO: Berechne den Mittelwert von `x <- c(1:78, NA)`.
+
+<!-- mean(x, na.rm=TRUE)-->
+
+# 4. Funktionen
+
+* Funktionen können selbst definiert werden:
+```{r eval=FALSE}
+# We want a function that squares its input:
+x <- 5
+x*x
+f1 <- function(x) x*x
+f1(x)
+
+```
+> TODO1: Definiere eine Funktion, die ihren Input verdoppelt und anschließend 5 addiert.
+
+<!-- f2 <- function(x) 2*x+5 -->
+
+> TODO2: Definiere eine Funktion, die den Mittelwert eines Vektors berechnet und vorher mögliche NAs entfernt (Tipp: `?mean`).
+
+<!-- f3 <- function(x) mean(x, na.rm=TRUE) -->
+
+# 5. Datenmanipulation
+
 1. Einlesen von Daten
 
 2. Manipulation der Daten
