@@ -42,13 +42,76 @@ __4. Files / Plots / Packages /Help__
     
 # 3. Datenstrukturen
 
+## 3.1 Homogene Datenstrukturen
+
 __1. Skalare__
-`x <- 5`
+```{r}
+s <- 5
+s
+str(s)
+s + 4
+s * 2
+```
+
 
 __2. Vektoren__
-`x <- c(5,4,5)
-__3. Matrizen__
-__4. Dataframes__
-__5. Listen__
+```{r}
+v <- c(5,4,5)
+v
+str(v)
+v + 4
+v * 2
+# Get 3rd element:
+v[3]
 
-# 4. Datenmanipulation mit dply
+```
+
+__3. Matrizen__
+```{r}
+m1 <- matrix(c(1,123,4,12,3,5), nrow=2)
+m1
+str(m1)
+m1 + 4
+m1 * 2
+m2 <- matrix(c("1","123","4","12","3","5"), nrow=2)
+m2
+str(m2)
+# get 2nd element in 1st row:
+m2[1,2]
+# get 2nd row:
+m2[,2]
+
+```
+
+## 3.2 Heterogene Datenstrukturen
+
+__1. Data frames__
+```{r}
+subject <- c(2,3,4)
+condition <- as.factor(c("EG","KG","EG"))
+dv <-  c(5,5,5)
+df <- data.frame(subject, condition, dv)
+df
+str(df)
+
+#get values on dv:
+df$dv
+#get values of subject 3:
+df[df$subject==3,]
+```
+
+* Data frames sind die Struktur in der unsere Daten normalerweiser oganisiert sind.
+
+__2. Listen__
+```{r}
+l <- list(c("a", "b", "c"), c(1,2,3,4), c(TRUE, FALSE, TRUE))
+l
+str(l)
+```
+* Viele Outputs von statistischen Funktionen sind Listen.
+
+# 4. Datenmanipulatio
+1. Einlesen von Daten
+
+2. Manipulation der Daten
+
