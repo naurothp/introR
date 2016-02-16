@@ -1,29 +1,31 @@
 ---
-title: "introToR"
-author: "PN"
-date: "14. Februar 2016"
-output: 
-  beamer_presentation: 
+title: "Einführung in R"
+author: "Peter Nauroth"
+output:
+  ioslides_presentation: default
+  beamer_presentation:
     colortheme: whale
+    slide_level: 2
+  slidy_presentation: default
 ---
 
 # 1. Was ist R?
-
-## R ist eine Programmiersprache
   
 ## Zentrale Strukturen
 
-  * Datenstrukturen & Datentyp (z.B. Variablen)
+__R ist eine Programmiersprache__
+
+  * Datenstrukturen & Datentyp
     *	Datentyp (`mode()`): numeric, character, boolean, factor
     * Datenstruktur (`str()`)
-    *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datennstruktur nicht zur Funktion passen!*
+    *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datenstruktur nicht zur Funktion passen!*
   * Operatoren (z.B. Zuordnung: `x <- 5`)
   * Funktionen (z.B. `'+'(4,5)`)
     * Funktionsparameter
 
-## Pädagogische Zugänge
-
 # 2. RStudio
+
+## GUI
 
 __1. Konsole__
 
@@ -37,15 +39,15 @@ __3. Workspace / History / GIT__
     *  `rm(list=ls())` --> Säubern des Workspace
     * erfordert mehr Mikromanagement als SPSS
 
-# 2. RStudio
+## GUI
   
-__4. Files / Plots / Packages /Help__
+__4. Files / Plots / Packages / Help__
 
   *	Working Directory beachten (`setwd()`)
   * Hilfe (`?`; z.B. `?lm`)
 	* Packages / Libraries
-    * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packages
-    * Um diese nutzen zu können:`get.packages()` & `library()`
+    * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packeten
+    * Um diese nutzen zu können: `install.packages()` & `library()`
     
 # 3. Datenstrukturen
 
@@ -62,8 +64,6 @@ s + 4
 s * 2
 ```
 
-# 3. Datenstrukturen
-
 ## 3.1 Homogene Datenstrukturen
 
 __2. Vektoren__
@@ -76,8 +76,6 @@ v * 2
 # get 3rd element:
 v[3]
 ```
-
-# 3. Datenstrukturen
 
 ## 3.1 Homogene Datenstrukturen
 
@@ -98,8 +96,6 @@ m2[,2]
 
 ```
 
-# 3. Datenstrukturen
-
 ## 3.2 Heterogene Datenstrukturen
 
 Datenstruktur mit potentiell unterschiedlichen Datentypen.
@@ -113,7 +109,7 @@ df <- data.frame(subject, condition, dv)
 df
 str(df)
 
-# get values on dv:
+# get values of dv:
 df$dv
 # alternatively
 df[,3]
@@ -123,6 +119,15 @@ df[df$subject==3,]
 df[2,]
 ```
 
+## 3.2 Heterogene Datenstrukturen
+
+__1. Data frames__
+
+```{r eval=FALSE}
+# get condition & dv
+df[,c(2,3)]
+```
+
 * Data frames sind die Struktur in der unsere Daten normalerweiser oganisiert sind.
 
 > TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.
@@ -130,13 +135,12 @@ df[2,]
 <!-- df[3,2]-->
 <!-- df[df$subject==4,names(df)]-->
 
-# 3. Datenstrukturen
-
 ## 3.2 Heterogene Datenstrukturen
 
 __2. Listen__
 ```{r eval=FALSE}
-l <- list(c("a", "b", "c"), c(1,2,3,4), c(TRUE, FALSE, TRUE))
+l <- list(c("a", "b", "c"), c(1,2,3,4), 
+          c(TRUE, FALSE, TRUE))
 l
 str(l)
 
@@ -146,52 +150,239 @@ l[[3]][1]
 ```
 * Viele Outputs von statistischen Funktionen sind Listen.
 
-__Das Verständnis über den Zugriff auf und die Organisation von den verschiedenen Datenstrukturen ist essentiell für das Arbeiten mit R.__
+__Das Verständnis über den Zugriff auf und die Organisation von Datenstrukturen ist essentiell für das Arbeiten mit R.__
 
 # 4. Funktionen
+
+## Grundsätzliches
 
 *Funktionen sind Methoden mit denen wir unsere Daten manipulieren und analyiseren.*
 
-* Ein Funktion hat einen _Namen_ (z.B.: `mean`),
-* _Parameter_ bzw. _Argumente_ (z.B.: `c(1,2,3)`) und
-* einen _Rückgabewert_ (z.B.: `## [1] 2`).
+Ein Funktion hat (einen):
 
-# 4. Funktionen
+  * _Namen_ (z. B.: `mean`),
+  * _Parameter_ bzw. _Argumente_ (z. B.: `c(1,2,3)`) 
+    + notwendige und
+    + optionale
+  * _Rückgabewert_ (z. B.: `## [1] 2`).
+
+## Grundsätzliches
 
 ```{r eval=FALSE}
 x <- c(1:10)
 x
 # Calculate mean of x
-mean(x) # That's a function call and x is a function parameter/argument
-# However, `mean` may have more parameters. Try ?mean
+mean(x) # That's a function call and x is a function 
+        # parameter/argument
+# However, mean() may have more parameters. Try:
+?mean
 ```
 
 > TODO: Berechne den Mittelwert von `x <- c(1:78, NA)`.
 
 <!-- mean(x, na.rm=TRUE)-->
 
-# 4. Funktionen
+## Selbstdefinierte Funktionen
 
 * Funktionen können selbst definiert werden:
 ```{r eval=FALSE}
 # We want a function that squares its input:
-x <- 5
-x*x
+y <- 5
+y*y
 f1 <- function(x) x*x
-f1(x)
-
+f1(y)
 ```
+
 > TODO1: Definiere eine Funktion, die ihren Input verdoppelt und anschließend 5 addiert.
 
-<!-- f2 <- function(x) 2*x+5 -->
+
 
 > TODO2: Definiere eine Funktion, die den Mittelwert eines Vektors berechnet und vorher mögliche NAs entfernt (Tipp: `?mean`).
 
-<!-- f3 <- function(x) mean(x, na.rm=TRUE) -->
+## Selbstdefinierte Funktionen
 
-# 5. Datenmanipulation
+```{r eval=FALSE}
+squarePlusFive <- function(x) 2*x+5
+myMean <- function(x) mean(x, na.rm=TRUE)
+```
 
-1. Einlesen von Daten
+## Funktionen
 
-2. Manipulation der Daten
+**Für fast alles gibt es bereits Funktionen.**
 
+  * Bevor man anfängt eine eigene Funktion zu schreiben lohnt sich eine Suche im Internet:
+    + [StackOverflow](http://www.stackoverflow.de)
+    + [Quick-R](http://www.statmethods.net/)
+    + [R-bloggers](http://www.r-bloggers.com/)
+
+# 5. Daten
+
+## Einlesen von .csv Dateien
+```{r eval=FALSE}
+data <- read.csv(file="data.csv")
+# read.table offers most important wrappers for importing 
+# .txt or .csv files
+?read.table
+```
+
+> TODO: Welche Wrapper sind am günstigsten um mit Excel erstellte .csv-Dateien einzulesen? (Tipp: Erstelle eine .csv mit Excel und öffne sie mit einem Texteditor)
+
+## Einlesen von .csv Dateien
+
+* R nutzt "/" oder "\\\\" um Ordner anzusteuern (nicht "\\" wie in Windows üblich):
+```{r eval=FALSE}
+d <- read.delim2(
+      "H:/Arbeit/Studien/3-SR-S0/data/data_SR.csv")
+# Or:
+d <- read.delim2(
+      "H:\\Arbeit\\Studien\\3-SR-S0\\data\\data_SR.csv")
+```
+
+## Einlesen von .sav Dateien (SPSS)
+* Um SPSS-Files einlesen zu können, brauchen wir ein spezielles Packet
+
+```{r eval=FALSE}
+install.packages("foreign") # install foreign package
+library(foreign)        # load the foreign package 
+?read.spss              # check out the documentation
+myData <- read.spss("myfile.sav", to.data.frame=TRUE)
+```
+
+> TODO: Einlesen einer eigenen SPSS Datei in R.
+
+<!-- http://www.castonline.ilstu.edu/smith/445/assspss/march%20madness.sav -->
+
+## Daten verstehen
+
+```{r eval=FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+
+str(diamonds)
+head(diamonds)
+View(diamonds)
+summary(diamonds)
+```
+
+## Manipulation von Daten
+
+  * Häufig müssen wir vorliegende Daten verändern ("manipulieren") um sie auswerten zu können.
+  * Beispiel:
+    * Wir wollen die Korrelationen von `carat`, `depth` und `price`
+    * Hilfreiche Funktion: `cor()`
+
+> TODO: Gebe die Korrelationsmatrix der drei Variablen auf der Konsole aus.
+
+## Manipulation von Daten
+
+```{r eval=FALSE}
+cor(diamonds[,c(1,5,7)])
+```
+
+  * Ein Problem dabei ist, dass wir immer die Spaltenposition der Variablen wissen müssen.
+  * Ein Packet das Datenmanipulationen enorm erleichtert ist `dplyr`.
+
+## `dplyr`
+
+*Eine kurze und gute Einführung in dplyr findet man hier: [Advanced R Programming](http://moc.environmentalinformatics-marburg.de/gitbooks/advancedProgrammingInR/_book/index.html)*
+
+```{r eval=FALSE}
+install.packages("dplyr")
+library(dplyr)            # Did you get any messages?
+```
+
+  * Zentrale Funktionen:
+    + tbl_df
+    + filter
+    + select
+    + arrange
+
+## `dplyr::tbl_df`
+
+```{r eval=FALSE}
+diamonds
+myData <- tbl_df(diamonds)
+myData
+```
+
+## `dplyr::filter`
+
+Häufig wollen wir nur Untermengen unserer Daten betrachten. Beispielsweise wollen wir uns nur Daten einer Bedingung anschauen.
+
+```{r eval=FALSE}
+# get all diamonds with premium cut
+myData[myData$cut=="Premium",]
+filter(myData, cut %in% c("Premium"))
+# not really more efficient
+# but what if we want: 
+#   all I- or J-colored 
+#   with 'Fair' or 'Good' cut quality 
+#   and a weight of more than 4 carat?
+```
+
+## `dplyr::filter`
+
+```{r eval=FALSE}
+myData[myData$cut %in% c("Fair","Good") & 
+       myData$color %in% c("I", "J") &
+       myData$carat > 4,]
+
+filter(diamonds, carat > 4 &
+         cut %in% c("Fair","Good") &
+         color %in% c("I", "J"))
+```
+
+## `dplyr::select`
+
+Bestimmte Spalten auszuwählen und damit weiterzuarbeiten ist eine der häufigsten Arbeitsschritte in R.
+
+```{r eval=FALSE}
+select(myData, carat, cut, color, price)
+select(myData, carat:color, price)
+```
+
+Mithilfe von `dplyr::select` spart man sich den Zugriff über die Spaltennummern.
+
+## `dplyr::arrange`
+
+Manchmal möchte man einen Datensatz nach bestimmten Kriterien ordnen.
+
+```{r eval=FALSE}
+# order the data ascending for carat and with
+# diamonds of same carat beeing sortet by descending
+# prices
+arrange(myData, carat, desc(price))
+```
+
+## `dplyr`
+
+  * Sehr nützliches Packet für einfache Datenmanipulationen
+  * Andere nützliche Funktionen in `dplyr`
+    + `mutate`
+    + `summarize`
+    + `group by`
+   
+# EXKURS: Explorative Faktorenanalyse
+
+## Explorative Faktorenanalyse
+```{r eval=FALSE}
+install.packages("nFactors")
+library(nFactors)
+
+# Maximum Likelihood Factor Analysis
+# entering raw data and extracting 1 factor, 
+# with varimax rotation 
+factor.myData <- dplyr::select(myData, carat, price:z)
+fit <- factanal(factor.myData, 1, rotation="varimax")
+print(fit, digits=2, cutoff=.3, sort=TRUE)
+```
+
+## Explorative Faktorenanalyse
+```{r eval=FALSE}
+# Scree and other test
+ev <- eigen(cor(factor.myData)) # get eigenvalues
+ap <- parallel(subject=nrow(factor.myData),var=ncol(factor.myData),
+  rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
+```
