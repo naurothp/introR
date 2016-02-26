@@ -256,12 +256,16 @@ myData <- read.spss("myfile.sav", to.data.frame=TRUE)
 
 ```{r eval=FALSE}
 install.packages("ggplot2")
+install.packages("psych")
 library(ggplot2)
+library(psych)
 
 str(diamonds)
 head(diamonds)
 View(diamonds)
 summary(diamonds)
+
+pairs.panels(diamonds)
 ```
 
 ## Manipulation von Daten
