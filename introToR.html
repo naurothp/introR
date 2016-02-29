@@ -204,17 +204,41 @@ m2[,2]</pre>
 condition &lt;- as.factor(c(&quot;EG&quot;,&quot;KG&quot;,&quot;EG&quot;))
 dv &lt;-  c(5,5,5)
 df &lt;- data.frame(subject, condition, dv)
-df
-str(df)
+df</pre>
 
-# get values of dv:
-df$dv
-# alternatively
-df[,3]
-# get values of subject 3:
-df[df$subject==3,]
-# alternatively
+<pre >##   subject condition dv
+## 1       2        EG  5
+## 2       3        KG  5
+## 3       4        EG  5</pre>
+
+<pre class = 'prettyprint lang-r'>str(df)</pre>
+
+<pre >## &#39;data.frame&#39;:    3 obs. of  3 variables:
+##  $ subject  : num  2 3 4
+##  $ condition: Factor w/ 2 levels &quot;EG&quot;,&quot;KG&quot;: 1 2 1
+##  $ dv       : num  5 5 5</pre>
+
+<pre class = 'prettyprint lang-r'># get values of dv:
+df$dv</pre>
+
+<pre >## [1] 5 5 5</pre>
+
+<pre class = 'prettyprint lang-r'># alternatively
+df[,3]</pre>
+
+<pre >## [1] 5 5 5</pre>
+
+<pre class = 'prettyprint lang-r'># get values of subject 3:
+df[df$subject==3,]</pre>
+
+<pre >##   subject condition dv
+## 2       3        KG  5</pre>
+
+<pre class = 'prettyprint lang-r'># alternatively
 df[2,]</pre>
+
+<pre >##   subject condition dv
+## 2       3        KG  5</pre>
 
 </article></slide><slide class=''><hgroup><h2>3.2 Heterogene Datenstrukturen</h2></hgroup><article  id="heterogene-datenstrukturen-1">
 
@@ -231,11 +255,25 @@ df[,c(2,3)]</pre>
 <p>TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.</p>
 </blockquote>
 
-<!-- df[3,2]-->
-
-<!-- df[df$subject==4,names(df)]-->
-
 </article></slide><slide class=''><hgroup><h2>3.2 Heterogene Datenstrukturen</h2></hgroup><article  id="heterogene-datenstrukturen-2">
+
+<p><strong>1. Data frames</strong></p>
+
+<blockquote>
+<p>TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.</p>
+</blockquote>
+
+<pre class = 'prettyprint lang-r'>df[3,2]</pre>
+
+<pre >## [1] EG
+## Levels: EG KG</pre>
+
+<pre class = 'prettyprint lang-r'>df[df$subject==4,names(df)==&quot;condition&quot;]</pre>
+
+<pre >## [1] EG
+## Levels: EG KG</pre>
+
+</article></slide><slide class=''><hgroup><h2>3.2 Heterogene Datenstrukturen</h2></hgroup><article  id="heterogene-datenstrukturen-3">
 
 <p><strong>2. Listen</strong></p>
 
@@ -381,7 +419,7 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
-pairs.panels(diamonds)</pre>
+pairs.panels(diamonds[c(1:1000),])</pre>
 
 </article></slide><slide class=''><hgroup><h2>Manipulation von Daten</h2></hgroup><article  id="manipulation-von-daten">
 
@@ -457,7 +495,7 @@ filter(diamonds, carat &gt; 4 &amp;
 
 </article></slide><slide class=''><hgroup><h2><code>dplyr::select</code></h2></hgroup><article  id="dplyrselect">
 
-<p>Bestimmte Spalten auszuwählen und damit weiterzuarbeiten ist eine der häufigsten Arbeitsschritte in R.</p>
+<p>Bestimmte Spalten auszuwählen und damit weiterzuarbeiten ist einer der häufigsten Arbeitsschritte in R.</p>
 
 <pre class = 'prettyprint lang-r'>select(myData, carat, cut, color, price)
 select(myData, carat:color, price)</pre>

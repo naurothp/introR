@@ -132,8 +132,17 @@ df[,c(2,3)]
 
 > TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.
 
-<!-- df[3,2]-->
-<!-- df[df$subject==4,names(df)]-->
+## 3.2 Heterogene Datenstrukturen
+
+__1. Data frames__
+
+> TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.
+
+```{r eval=FALSE}
+df[3,2]
+df[df$subject==4, names(df)=="condition"]
+```
+
 
 ## 3.2 Heterogene Datenstrukturen
 
@@ -185,6 +194,7 @@ mean(x) # That's a function call and x is a function
 ## Selbstdefinierte Funktionen
 
 * Funktionen können selbst definiert werden:
+
 ```{r eval=FALSE}
 # We want a function that squares its input:
 y <- 5
@@ -265,7 +275,7 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
-pairs.panels(diamonds)
+pairs.panels(diamonds[c(1:1000),])
 ```
 
 ## Manipulation von Daten
@@ -338,7 +348,7 @@ filter(diamonds, carat > 4 &
 
 ## `dplyr::select`
 
-Bestimmte Spalten auszuwählen und damit weiterzuarbeiten ist eine der häufigsten Arbeitsschritte in R.
+Bestimmte Spalten auszuwählen und damit weiterzuarbeiten ist einer der häufigsten Arbeitsschritte in R.
 
 ```{r eval=FALSE}
 select(myData, carat, cut, color, price)
