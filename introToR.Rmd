@@ -202,7 +202,7 @@ f1(y)
 ## Selbstdefinierte Funktionen
 
 ```{r eval=FALSE}
-squarePlusFive <- function(x) 2*x+5
+squarePlusFive <- function(x) x*x+5
 myMean <- function(x) mean(x, na.rm=TRUE)
 ```
 
