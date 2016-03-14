@@ -2,10 +2,10 @@
 title: "Einführung in R"
 author: "Peter Nauroth"
 output:
-  ioslides_presentation: default
   beamer_presentation:
     colortheme: whale
     slide_level: 2
+  ioslides_presentation: default
   slidy_presentation: default
 ---
 
@@ -212,7 +212,7 @@ f1(y)
 ## Selbstdefinierte Funktionen
 
 ```{r eval=FALSE}
-squarePlusFive <- function(x) x*x+5
+doublePlusFive <- function(x) 2*x+5
 myMean <- function(x) mean(x, na.rm=TRUE)
 ```
 
