@@ -1,0 +1,58 @@
+
+Download and install R
+
+http://ftp5.gwdg.de/pub/misc/cran/
+
+Download and install RStudio
+
+https://www.rstudio.com/products/rstudio/#Desktop
+
+
+# Run the following commands in the console (panel bottom left) of RStudio (copy, paste, and run with ENTER)
+ 
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("psych")
+library(psych)
+install.packages("dplyr")
+library(dplyr)
+install.packages("nFactors")
+library(nFactors)
+
+install.packages("foreign")
+library(foreign)
+install.packages("Hmisc")
+library(Hmisc)
+install.packages("ggm")
+library(ggm)
+install.packages("polycor")
+library(polycor)
+install.packages("pastecs")
+library(pastecs)
+
+install.packages("car")
+library(car)
+install.packages("compute.es")
+library(compute.es)
+install.packages("multcomp")
+library(multcomp)
+install.packages("WRS2")
+library(WRS2)
+install.packages("reshape")
+library(reshape)
+install.packages("phia")
+library(phia)
+install.packages("ez")
+library(ez)
+install.packages("nlme")
+library(nlme)
+install.packages("QuantPsyc")
+library(QuantPsyc)
+
+# Warning messages are ok, Error messages not.
+# Sometimes it is safer to install one packages at a time
+# By running the "library" commands one can test whether the installation was successful
+# If there are problems installing a package, please try the following way to install it: 
+	# Via "Tools" in the command line above with "Install packages" and write the package name
+	# (e.g., Hmisc) in the blank line "Packages (separate multiple with space or comma)"
+	# and click "Install"
