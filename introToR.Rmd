@@ -36,8 +36,8 @@ __2. Skript__
 __3. Workspace / History / GIT__
 
   * *Viele Probleme sind auf unbeabsichtigte Objekte im Workspace zurükzuführen.*
-    *  `rm(list=ls())` --> Säubern des Workspace
-    * erfordert mehr Mikromanagement als SPSS
+    + `rm(list=ls())` --> Säubern des Workspace
+    + erfordert mehr Mikromanagement als SPSS
 
 ## GUI
   
@@ -46,16 +46,36 @@ __4. Files / Plots / Packages / Help__
   *	Working Directory beachten (`setwd()`)
   * Hilfe (`?`; z.B. `?lm`)
 	* Packages / Libraries
-    * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packeten
+    * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Paketen
     * Um diese nutzen zu können: `install.packages()` & `library()`
     
-# 3. Operatoren & Datenstrukturen
+# 3. Operatoren, Datentypen & Datenstrukturen
 
-## 3.0 Operatoren
+## 3.1 Datentypen
 
+  * numeric: ganzzahlige (integer) oder Gleitkomma-Werte (double)
+  * character: Zeichen [String: Zeichenkette]
+  * logical: Wahrheitswerte (`TRUE` und `FALSE`)
+    + `(5 == 5) == FALSE`
+  * factor: nominale oder ordinale Daten (intern: integer mit labels)
+  * (list: rekursive Datenstruktur)
 
+## 3.2 Operatoren
+  
+  * Mathematische Operatoren: `^ %% %/% * /  + -`
+  * Logische Operatoren: `< > <= >= == != ! & && | ||`
+  * Zuordnung: `<-` oder `=`
+  
+  * Präzedenz: von oben nach unten, von links nach rechts
 
-## 3.1 Homogene Datenstrukturen
+> TODO: Was ergibt der folgende Ausdruck: 
+> `(1+2*3 <= 6) | (5==5) == !FALSE`
+
+## 3.3 Datenstrukturen
+
+__Das Verständnis über den Zugriff auf und die Organisation von Datenstrukturen ist essentiell für das Arbeiten mit R.__
+
+## 3.3.1 Homogene Datenstrukturen
 
 Homogene Datenstrukturen enthalten nur einen Datentyp.
 
@@ -68,7 +88,7 @@ s + 4
 s * 2
 ```
 
-## 3.1 Homogene Datenstrukturen
+## 3.3.1 Homogene Datenstrukturen
 
 __2. Vektoren__
 ```{r eval=FALSE}
@@ -81,7 +101,7 @@ v * 2
 v[3]
 ```
 
-## 3.1 Homogene Datenstrukturen
+## 3.3.1 Homogene Datenstrukturen
 
 __3. Matrizen__
 ```{r eval=FALSE}
@@ -100,7 +120,7 @@ m2[,2]
 
 ```
 
-## 3.2 Heterogene Datenstrukturen
+## 3.3.2 Heterogene Datenstrukturen
 
 Datenstruktur mit potentiell unterschiedlichen Datentypen.
 
@@ -123,7 +143,7 @@ df[df$subject==3,]
 df[2,]
 ```
 
-## 3.2 Heterogene Datenstrukturen
+## 3.3.2 Heterogene Datenstrukturen
 
 __1. Data frames__
 
@@ -132,11 +152,11 @@ __1. Data frames__
 df[,c(2,3)]
 ```
 
-* Data frames sind die Struktur in der unsere Daten normalerweiser oganisiert sind.
+* Data frames sind die Struktur in der unsere Daten normalerweiser organisiert sind.
 
 > TODO: Gebe die Bedingungszugehörigkeit von Subjekt 4 auf der Konsole aus.
 
-## 3.2 Heterogene Datenstrukturen
+## 3.3.2 Heterogene Datenstrukturen
 
 __1. Data frames__
 
@@ -148,7 +168,7 @@ df[df$subject==4, names(df)=="condition"]
 ```
 
 
-## 3.2 Heterogene Datenstrukturen
+## 3.3.2 Heterogene Datenstrukturen
 
 __2. Listen__
 ```{r eval=FALSE}
@@ -161,9 +181,8 @@ str(l)
 l[[3]][1]
 
 ```
-* Viele Outputs von statistischen Funktionen sind Listen.
 
-__Das Verständnis über den Zugriff auf und die Organisation von Datenstrukturen ist essentiell für das Arbeiten mit R.__
+* Viele Outputs von statistischen Funktionen sind Listen.
 
 # 4. Funktionen
 
@@ -199,9 +218,9 @@ mean(x) # That's a function call and x is a function
 mean(x, na.rm=TRUE) 
 ```
 
-* NAs stellen ein häufiges Problem für Funktione in R dar:
+* NAs stellen ein häufiges Problem für Funktionen in R dar:
 * Prinzipiell 2 Möglichkeiten:
-  + Funktionsparamter vorhanden (z.B. `na.rm=TRUE`)
+  + Funktionsparameter vorhanden (z.B. `na.rm=TRUE`)
   + vorher ausschließen (z.B. `dplyr::filter(data, !is.na(x))`; dazu später mehr)
 
 ## Selbstdefinierte Funktionen
@@ -262,7 +281,7 @@ d <- read.delim2(
 ```
 
 ## Einlesen von .sav Dateien (SPSS)
-* Um SPSS-Files einlesen zu können, brauchen wir ein spezielles Packet
+* Um SPSS-Files einlesen zu können, brauchen wir ein spezielles Paket
 
 ```{r eval=FALSE}
 install.packages("foreign") # install foreign package
@@ -310,7 +329,7 @@ cor(diamonds[,c(1,5,7)])
 ```
 
   * Ein Problem dabei ist, dass wir immer die Spaltenposition der Variablen wissen müssen.
-  * Ein Packet das Datenmanipulationen enorm erleichtert ist `dplyr`.
+  * Ein Paket das Datenmanipulationen enorm erleichtert ist `dplyr`.
 
 ## `dplyr`
 
@@ -386,7 +405,7 @@ arrange(myData, carat, desc(price))
 
 ## `dplyr`
 
-  * Sehr nützliches Packet für einfache Datenmanipulationen
+  * Sehr nützliches Paket für einfache Datenmanipulationen
   * Andere nützliche Funktionen in `dplyr`
     + `mutate`
     + `summarize`
@@ -473,7 +492,7 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
 
 ## Nachvollziehbare Programmierung
 
-  * Modulariserung
+  * Modularisierung
     - Codeblöcke NIE copy & pasten
     - besser eine Funktion extrahieren
     - und in eigene Dateien schreiben: `source("supple-functions.R")`
@@ -495,7 +514,7 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
     + Häufigkeiten
     + Kreuztabellen
     + Korrelationen: `stats`, `Hmisc`
-    + Nichtparametrische Verfahren
+    + Nicht-parametrische Verfahren
   * __Varianzanalyse__: `car`, `ez`, `multcomp`...
   * __Datenvisualisierung: `ggplot2`__
   * Skalenanalyse und explorative Faktorenanalyse: z.B. `psych`
@@ -503,8 +522,8 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
 
 ## Potentielle Themen 2
 
-  * Effekstärkenberechnung / Poweranalyse
-  * Metaanalytische Verfahren: z.B. `metafor`
+  * Effektstärkenberechnung / Poweranalyse
+  * Meta-analytische Verfahren: z.B. `metafor`
   * Latente Modelle / Konfirmatorische Faktorenanalyse: `lavaan`
   * Datenvisualisierung 2: `lattice`
   * Simulationen mit R
