@@ -151,7 +151,9 @@
 </ul></li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>3. Datenstrukturen</h2></hgroup><article  id="datenstrukturen">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>@. Operatoren</h2></hgroup><article  id="operatoren">
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>@. Datenstrukturen</h2></hgroup><article  id="datenstrukturen">
 
 </article></slide><slide class=''><hgroup><h2>3.1 Homogene Datenstrukturen</h2></hgroup><article  id="homogene-datenstrukturen">
 
@@ -293,7 +295,16 @@ mean(x) # That&#39;s a function call and x is a function
 <p>TODO: Berechne den Mittelwert von <code>x &lt;- c(1:78, NA)</code>.</p>
 </blockquote>
 
-<!-- mean(x, na.rm=TRUE)-->
+</article></slide><slide class=''><hgroup><h2>Grundsätzliches</h2></hgroup><article  id="grundsatzliches-2">
+
+<pre class = 'prettyprint lang-r'>mean(x, na.rm=TRUE) </pre>
+
+<ul>
+<li>NAs stellen ein häufiges Problem für Funktione in R dar:</li>
+<li>Prinzipiell 2 Möglichkeiten:</li>
+<li>Funktionsparamter vorhanden (z.B. <code>na.rm=TRUE</code>)</li>
+<li>vorher ausschließen (z.B. <code>dplyr::filter(data, !is.na(x))</code>; dazu später mehr)</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>Selbstdefinierte Funktionen</h2></hgroup><article  id="selbstdefinierte-funktionen">
 
@@ -378,8 +389,8 @@ myData &lt;- read.spss(&quot;myfile.sav&quot;, to.data.frame=TRUE)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Daten verstehen</h2></hgroup><article  id="daten-verstehen">
 
-<pre class = 'prettyprint lang-r'>install.packages(&quot;ggplot2&quot;)
-install.packages(&quot;psych&quot;)
+<pre class = 'prettyprint lang-r'>#install.packages(&quot;ggplot2&quot;)
+#install.packages(&quot;psych&quot;)
 library(ggplot2)
 library(psych)
 
@@ -388,12 +399,14 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
+by(diamonds, diamonds[,&quot;cut&quot;], function(x) lm(carat~price, data=x)$coefficients)
+
 pairs.panels(diamonds[c(1:1000),])</pre>
 
 </article></slide><slide class=''><hgroup><h2>Manipulation von Daten</h2></hgroup><article  id="manipulation-von-daten">
 
 <ul>
-<li>Häufig müssen wir vorliegende Daten verändern (&quot;manipulieren&quot;) um sie auswerten zu können.</li>
+<li><p>Häufig müssen wir vorliegende Daten verändern (&quot;manipulieren&quot;) um sie auswerten zu können.</p></li>
 <li>Beispiel:
 
 <ul>
@@ -493,28 +506,135 @@ arrange(myData, carat, desc(price))</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>EXKURS: Explorative Faktorenanalyse</h2></hgroup><article  id="exkurs-explorative-faktorenanalyse">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Gundlegende statistische Verfahren</h2></hgroup><article  id="gundlegende-statistische-verfahren">
 
-</article></slide><slide class=''><hgroup><h2>Explorative Faktorenanalyse</h2></hgroup><article  id="explorative-faktorenanalyse">
+</article></slide><slide class=''><hgroup><h2>t-Tests</h2></hgroup><article  id="t-tests">
 
-<pre class = 'prettyprint lang-r'>install.packages(&quot;nFactors&quot;)
-library(nFactors)
+<pre class = 'prettyprint lang-r'># independent 2-group t-test
+t.test(y~x) # where y is numeric and x is a binary(!) factor
 
-# Maximum Likelihood Factor Analysis
-# entering raw data and extracting 1 factor, 
-# with varimax rotation 
-factor.myData &lt;- dplyr::select(myData, carat, price:z)
-fit &lt;- factanal(factor.myData, 1, rotation=&quot;varimax&quot;)
-print(fit, digits=2, cutoff=.3, sort=TRUE)</pre>
+# independent 2-group t-test
+t.test(y1, y2) # where y1 and y2 are numeric
 
-</article></slide><slide class=''><hgroup><h2>Explorative Faktorenanalyse</h2></hgroup><article  id="explorative-faktorenanalyse-1">
+# paired t-test
+t.test(y1, y2, paired=TRUE) # where y1 &amp; y2 are numeric</pre>
 
-<pre class = 'prettyprint lang-r'># Scree and other test
-ev &lt;- eigen(cor(factor.myData)) # get eigenvalues
-ap &lt;- parallel(subject=nrow(factor.myData),var=ncol(factor.myData),
-  rep=100,cent=.05)
-nS &lt;- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
-plotnScree(nS)</pre></article></slide>
+<blockquote>
+<p>TODO: Unterscheiden sich die &quot;gute&quot;&quot; Diamanten preislich von &quot;sehr guten&quot; Diamanten?</p>
+</blockquote>
+
+</article></slide><slide class=''><hgroup><h2>t-Tests</h2></hgroup><article  id="t-tests-1">
+
+<pre class = 'prettyprint lang-r'>t.test(diamonds$price[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)] 
+       factor(diamonds$cut[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]))
+
+tTestData &lt;- diamonds %&gt;%                   # %&gt;% = then (&quot;pipelining&quot;)
+  filter(cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;))
+
+t.test(tTestData$price~tTestData$cut)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Lineare Modelle</h2></hgroup><article  id="lineare-modelle">
+
+<pre class = 'prettyprint lang-r'>testData &lt;- data.frame(y = rnorm(100),  
+                        x1 = rnorm(100), 
+                        x2 = rnorm(100), 
+                        x3 = rnorm(100))
+
+lm(y ~ x1 + x2 + x3, data=testData)
+
+myRegression &lt;- lm(y ~ x1 + x2 + x3, data=testData)
+summary(myRegression)
+
+myInteraction &lt;- lm(y ~ x1 * x2 * x3, data=testData)
+summary(myInteraction)</pre>
+
+<blockquote>
+<p>TODO: Sagen carat, clarity &amp; color den price vorher?</p>
+</blockquote>
+
+<blockquote>
+<p>Vorsicht: Datentypen beachten und evlt. transformieren (<code>?as.numeric()</code>)</p>
+</blockquote>
+
+</article></slide><slide class=''><hgroup><h2>Lineare Modelle</h2></hgroup><article  id="lineare-modelle-1">
+
+<pre class = 'prettyprint lang-r'>myRegression &lt;- lm(price~carat + as.numeric(clarity) + as.numeric(color), data = diamonds)
+summary(myRegression)</pre>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Gundlegende Programmierkenntnisse</h2></hgroup><article  id="gundlegende-programmierkenntnisse">
+
+</article></slide><slide class=''><hgroup><h2>Selbstverständlicher Code</h2></hgroup><article  id="selbstverstandlicher-code">
+
+<ul>
+<li>Kommentieren!</li>
+<li>Einheitliche und konsistente Namensgebung z.B.: <code>squareAndDouble</code> oder <code>square.and.double</code></li>
+<li>selbsterklärende Variablennamen und Funktionsnamen
+
+<ul>
+<li>besser lang und verständlich als kurz und kryptisch!</li>
+</ul></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'># ------------- Intro to R ------------- #
+
+# ----------------- Supplementary Functions
+
+# This is a wrapper for the mean(..., na.rm=TRUE) function
+meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Nachvollziehbare Programmierung</h2></hgroup><article  id="nachvollziehbare-programmierung">
+
+<ul>
+<li>Modulariserung
+
+<ul>
+<li>Codeblöcke NIE copy &amp; pasten</li>
+<li>besser eine Funktion extrahieren</li>
+<li>und in eigene Dateien schreiben: <code>source(&quot;supple-functions.R&quot;)</code></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>2. Termin</h2></hgroup><article  id="termin">
+
+</article></slide><slide class=''><hgroup><h2>Organisatorisches</h2></hgroup><article  id="organisatorisches">
+
+<ul>
+<li>Eigener Laptop (Raum: S2) <!-- Mehrfachstecker etc. besorgen (-> THEO) --></li>
+<li>Präsentation:
+
+<ul>
+<li>Kommentierter und selbstverständlicher R Code</li>
+<li>einseitiges Handout mit wichtigsten Infos</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Potentielle Themen</h2></hgroup><article  id="potentielle-themen">
+
+<ul>
+<li>Datenmanipulation 2: <code>reshape2</code></li>
+<li><strong>Grundlegende Statistik:</strong>
+
+<ul>
+<li>Häufigkeiten</li>
+<li>Kreuztabellen</li>
+<li>Korrelationen: <code>stats</code>, <code>Hmisc</code></li>
+<li>Nichtparametrische Verfahren</li>
+</ul></li>
+<li><strong>Varianzanalyse</strong>: <code>car</code>, <code>ez</code>, <code>multcomp</code>&#8230;</li>
+<li><strong>Datenvisualisierung: <code>ggplot2</code></strong></li>
+<li>Skalenanalyse und explorative Faktorenanalyse: z.B. <code>psych</code></li>
+<li>Reporting (RMarkdown) &amp; Version Control Management (GIT)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Potentielle Themen 2</h2></hgroup><article  id="potentielle-themen-2">
+
+<ul>
+<li>Effekstärkenberechnung / Poweranalyse</li>
+<li>Metaanalytische Verfahren: z.B. <code>metafor</code></li>
+<li>Latente Modelle / Konfirmatorische Faktorenanalyse: <code>lavaan</code></li>
+<li>Datenvisualisierung 2: <code>lattice</code></li>
+<li>Simulationen mit R</li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>

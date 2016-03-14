@@ -2,10 +2,10 @@
 title: "Einführung in R"
 author: "Peter Nauroth"
 output:
+  ioslides_presentation: default
   beamer_presentation:
     colortheme: whale
     slide_level: 2
-  ioslides_presentation: default
   slidy_presentation: default
 ---
 
@@ -49,7 +49,11 @@ __4. Files / Plots / Packages / Help__
     * Für (fast) alles gibt es bereits vorgefertigte Funktionen in Packeten
     * Um diese nutzen zu können: `install.packages()` & `library()`
     
-# 3. Datenstrukturen
+# 3. Operatoren & Datenstrukturen
+
+## 3.0 Operatoren
+
+
 
 ## 3.1 Homogene Datenstrukturen
 
@@ -189,7 +193,16 @@ mean(x) # That's a function call and x is a function
 
 > TODO: Berechne den Mittelwert von `x <- c(1:78, NA)`.
 
-<!-- mean(x, na.rm=TRUE)-->
+## Grundsätzliches
+
+```{r eval=FALSE}
+mean(x, na.rm=TRUE) 
+```
+
+* NAs stellen ein häufiges Problem für Funktione in R dar:
+* Prinzipiell 2 Möglichkeiten:
+  + Funktionsparamter vorhanden (z.B. `na.rm=TRUE`)
+  + vorher ausschließen (z.B. `dplyr::filter(data, !is.na(x))`; dazu später mehr)
 
 ## Selbstdefinierte Funktionen
 
@@ -265,8 +278,8 @@ myData <- read.spss("myfile.sav", to.data.frame=TRUE)
 ## Daten verstehen
 
 ```{r eval=FALSE}
-install.packages("ggplot2")
-install.packages("psych")
+#install.packages("ggplot2")
+#install.packages("psych")
 library(ggplot2)
 library(psych)
 
@@ -275,12 +288,15 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
+by(diamonds, diamonds[,"cut"], function(x) lm(carat~price, data=x)$coefficients)
+
 pairs.panels(diamonds[c(1:1000),])
 ```
 
 ## Manipulation von Daten
 
   * Häufig müssen wir vorliegende Daten verändern ("manipulieren") um sie auswerten zu können.
+  
   * Beispiel:
     * Wir wollen die Korrelationen von `carat`, `depth` und `price`
     * Hilfreiche Funktion: `cor()`
@@ -375,28 +391,120 @@ arrange(myData, carat, desc(price))
     + `mutate`
     + `summarize`
     + `group by`
-   
-# EXKURS: Explorative Faktorenanalyse
+    
+# Gundlegende statistische Verfahren
 
-## Explorative Faktorenanalyse
+## t-Tests
+
 ```{r eval=FALSE}
-install.packages("nFactors")
-library(nFactors)
 
-# Maximum Likelihood Factor Analysis
-# entering raw data and extracting 1 factor, 
-# with varimax rotation 
-factor.myData <- dplyr::select(myData, carat, price:z)
-fit <- factanal(factor.myData, 1, rotation="varimax")
-print(fit, digits=2, cutoff=.3, sort=TRUE)
+# independent 2-group t-test
+t.test(y~x) # where y is numeric and x is a binary(!) factor
+
+# independent 2-group t-test
+t.test(y1, y2) # where y1 and y2 are numeric
+
+# paired t-test
+t.test(y1, y2, paired=TRUE) # where y1 & y2 are numeric
 ```
 
-## Explorative Faktorenanalyse
+> TODO: Unterscheiden sich die "gute"" Diamanten preislich von "sehr guten" Diamanten?
+
+
+## t-Tests
+
 ```{r eval=FALSE}
-# Scree and other test
-ev <- eigen(cor(factor.myData)) # get eigenvalues
-ap <- parallel(subject=nrow(factor.myData),var=ncol(factor.myData),
-  rep=100,cent=.05)
-nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
-plotnScree(nS)
+
+t.test(diamonds$price[diamonds$cut%in%c("Good", "Very Good")] 
+       factor(diamonds$cut[diamonds$cut%in%c("Good", "Very Good")]))
+
+tTestData <- diamonds %>%                   # %>% = then ("pipelining")
+  filter(cut%in%c("Good", "Very Good"))
+
+t.test(tTestData$price~tTestData$cut)
+
 ```
+
+## Lineare Modelle
+
+```{r eval=FALSE}
+testData <- data.frame(y = rnorm(100),  
+                        x1 = rnorm(100), 
+                        x2 = rnorm(100), 
+                        x3 = rnorm(100))
+
+lm(y ~ x1 + x2 + x3, data=testData)
+
+myRegression <- lm(y ~ x1 + x2 + x3, data=testData)
+summary(myRegression)
+
+myInteraction <- lm(y ~ x1 * x2 * x3, data=testData)
+summary(myInteraction)
+```
+
+> TODO: Sagen carat, clarity & color den price vorher?
+
+> Vorsicht: Datentypen beachten und evlt. transformieren (`?as.numeric()`)
+
+## Lineare Modelle
+
+```{r eval=FALSE}
+myRegression <- lm(price~carat + as.numeric(clarity) + as.numeric(color), data = diamonds)
+summary(myRegression)
+```
+
+# Gundlegende Programmierkenntnisse
+
+## Selbstverständlicher Code
+
+  * Kommentieren!
+  * Einheitliche und konsistente Namensgebung z.B.: `squareAndDouble` oder `square.and.double`
+  * selbsterklärende Variablennamen und Funktionsnamen
+    - besser lang und verständlich als kurz und kryptisch!
+    
+```{r eval=FALSE}
+# ------------- Intro to R ------------- #
+
+# ----------------- Supplementary Functions
+
+# This is a wrapper for the mean(..., na.rm=TRUE) function
+meanNA <- function(x) mean(x, na.rm = TRUE)
+```
+
+## Nachvollziehbare Programmierung
+
+  * Modulariserung
+    - Codeblöcke NIE copy & pasten
+    - besser eine Funktion extrahieren
+    - und in eigene Dateien schreiben: `source("supple-functions.R")`
+    
+# 2. Termin
+
+## Organisatorisches
+
+  * Eigener Laptop (Raum: S2)
+<!-- Mehrfachstecker etc. besorgen (-> THEO) --> 
+  * Präsentation:
+    + Kommentierter und selbstverständlicher R Code
+    + einseitiges Handout mit wichtigsten Infos
+
+## Potentielle Themen
+
+  * Datenmanipulation 2: `reshape2`
+  * __Grundlegende Statistik:__
+    + Häufigkeiten
+    + Kreuztabellen
+    + Korrelationen: `stats`, `Hmisc`
+    + Nichtparametrische Verfahren
+  * __Varianzanalyse__: `car`, `ez`, `multcomp`...
+  * __Datenvisualisierung: `ggplot2`__
+  * Skalenanalyse und explorative Faktorenanalyse: z.B. `psych`
+  * Reporting (RMarkdown) & Version Control Management (GIT)
+
+## Potentielle Themen 2
+
+  * Effekstärkenberechnung / Poweranalyse
+  * Metaanalytische Verfahren: z.B. `metafor`
+  * Latente Modelle / Konfirmatorische Faktorenanalyse: `lavaan`
+  * Datenvisualisierung 2: `lattice`
+  * Simulationen mit R
