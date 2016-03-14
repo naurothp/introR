@@ -1,5 +1,5 @@
 ---
-title: "Einführung in R"
+title: "Datenanalysen mit R"
 author: "Peter Nauroth"
 output:
   ioslides_presentation: default
@@ -62,13 +62,14 @@ __4. Files / Plots / Packages / Help__
 
 ## 3.2 Operatoren
   
-  * Mathematische Operatoren: `^ %% %/% * /  + -`
-  * Logische Operatoren: `< > <= >= == != ! & && | ||`
-  * Zuordnung: `<-` oder `=`
+  1. Mathematische Operatoren: `^ %% %/% * / + -`
+  2. Logische Operatoren: `< > <= >= == != ! & && | ||`
+  3. Zuordnung: `<-` oder `=`
   
-  * Präzedenz: von oben nach unten, von links nach rechts
+  * Präzedenz: von 1. zu 3., von links nach rechts
 
 > TODO: Was ergibt der folgende Ausdruck: 
+
 > `(1+2*3 <= 6) | (5==5) == !FALSE`
 
 ## 3.3 Datenstrukturen
@@ -78,6 +79,7 @@ __Das Verständnis über den Zugriff auf und die Organisation von Datenstrukture
 ## 3.3.1 Homogene Datenstrukturen
 
 Homogene Datenstrukturen enthalten nur einen Datentyp.
+
 
 __1. Skalare__
 ```{r eval=FALSE}
@@ -123,6 +125,7 @@ m2[,2]
 ## 3.3.2 Heterogene Datenstrukturen
 
 Datenstruktur mit potentiell unterschiedlichen Datentypen.
+
 
 __1. Data frames__
 ```{r eval=FALSE}
@@ -411,7 +414,7 @@ arrange(myData, carat, desc(price))
     + `summarize`
     + `group by`
     
-# Gundlegende statistische Verfahren
+# 6. Gundlegende statistische Verfahren
 
 ## t-Tests
 
@@ -472,7 +475,7 @@ myRegression <- lm(price~carat + as.numeric(clarity) + as.numeric(color), data =
 summary(myRegression)
 ```
 
-# Gundlegende Programmierkenntnisse
+# 7. Gundlegende Programmierkenntnisse
 
 ## Selbstverständlicher Code
 
@@ -497,9 +500,9 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
     - besser eine Funktion extrahieren
     - und in eigene Dateien schreiben: `source("supple-functions.R")`
     
-# 2. Termin
+# 8. Organisatorisches
 
-## Organisatorisches
+## Organisatorisches zum 2. Termin
 
   * Eigener Laptop (Raum: S2)
 <!-- Mehrfachstecker etc. besorgen (-> THEO) --> 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Einführung in R</title>
+  <title>Datenanalysen mit R</title>
 
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,7 +25,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'Einführung in R',
+                title: 'Datenanalysen mit R',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -169,15 +169,22 @@
 
 </article></slide><slide class=''><hgroup><h2>3.2 Operatoren</h2></hgroup><article  id="operatoren">
 
-<ul>
-<li>Mathematische Operatoren: <code>^ %% %/% * /  + -</code></li>
+<ol>
+<li>Mathematische Operatoren: <code>^ %% %/% * / + -</code></li>
 <li>Logische Operatoren: <code>&lt; &gt; &lt;= &gt;= == != ! &amp; &amp;&amp; | ||</code></li>
-<li><p>Zuordnung: <code>&lt;-</code> oder <code>=</code></p></li>
-<li><p>Präzedenz: von oben nach unten, von links nach rechts</p></li>
+<li>Zuordnung: <code>&lt;-</code> oder <code>=</code></li>
+</ol>
+
+<ul>
+<li>Präzedenz: von 1. zu 3., von links nach rechts</li>
 </ul>
 
 <blockquote>
-<p>TODO: Was ergibt der folgende Ausdruck:<code>(1+2*3 &lt;= 6) | (5==5) == !FALSE</code></p>
+<p>TODO: Was ergibt der folgende Ausdruck:</p>
+</blockquote>
+
+<blockquote>
+<p><code>(1+2*3 &lt;= 6) | (5==5) == !FALSE</code></p>
 </blockquote>
 
 </article></slide><slide class=''><hgroup><h2>3.3 Datenstrukturen</h2></hgroup><article  id="datenstrukturen">
@@ -533,7 +540,7 @@ arrange(myData, carat, desc(price))</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Gundlegende statistische Verfahren</h2></hgroup><article  id="gundlegende-statistische-verfahren">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>6. Gundlegende statistische Verfahren</h2></hgroup><article  id="gundlegende-statistische-verfahren">
 
 </article></slide><slide class=''><hgroup><h2>t-Tests</h2></hgroup><article  id="t-tests">
 
@@ -588,7 +595,7 @@ summary(myInteraction)</pre>
 <pre class = 'prettyprint lang-r'>myRegression &lt;- lm(price~carat + as.numeric(clarity) + as.numeric(color), data = diamonds)
 summary(myRegression)</pre>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Gundlegende Programmierkenntnisse</h2></hgroup><article  id="gundlegende-programmierkenntnisse">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>7. Gundlegende Programmierkenntnisse</h2></hgroup><article  id="gundlegende-programmierkenntnisse">
 
 </article></slide><slide class=''><hgroup><h2>Selbstverständlicher Code</h2></hgroup><article  id="selbstverstandlicher-code">
 
@@ -621,9 +628,9 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>2. Termin</h2></hgroup><article  id="termin">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>8. Organisatorisches</h2></hgroup><article  id="organisatorisches">
 
-</article></slide><slide class=''><hgroup><h2>Organisatorisches</h2></hgroup><article  id="organisatorisches">
+</article></slide><slide class=''><hgroup><h2>Organisatorisches zum 2. Termin</h2></hgroup><article  id="organisatorisches-zum-2.-termin">
 
 <ul>
 <li>Eigener Laptop (Raum: S2)<!-- Mehrfachstecker etc. besorgen (-> THEO) --></li>
