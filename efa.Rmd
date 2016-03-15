@@ -1,0 +1,45 @@
+---
+title: "Einführung in R"
+author: "Peter Nauroth"
+output:
+  beamer_presentation:
+    colortheme: whale
+    slide_level: 2
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r eval=FALSE}
+#install.packages("ggplot2")
+#install.packages("psych")
+library(ggplot2)
+library(psych)
+
+myData <- tbl_df(diamonds)
+```
+
+# EXKURS: Explorative Faktorenanalyse
+
+## Explorative Faktorenanalyse
+```{r eval=FALSE}
+install.packages("nFactors")
+library(nFactors)
+
+# Maximum Likelihood Factor Analysis
+# entering raw data and extracting 1 factor, 
+# with varimax rotation 
+factor.myData <- dplyr::select(myData, carat, price:z)
+fit <- factanal(factor.myData, 1, rotation="varimax")
+print(fit, digits=2, cutoff=.3, sort=TRUE)
+```
+
+## Explorative Faktorenanalyse
+```{r eval=FALSE}
+# Scree and other test
+ev <- eigen(cor(factor.myData)) # get eigenvalues
+ap <- parallel(subject=nrow(factor.myData),var=ncol(factor.myData),
+  rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
+```
+
