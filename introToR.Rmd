@@ -311,7 +311,11 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
-by(diamonds, diamonds[,"cut"], function(x) lm(carat~price, data=x)$coefficients)
+by(diamonds, 
+   diamonds[,"cut"], 
+   function(x) lm(carat~price, data=x)$coefficients)
+
+with(diamonds, mean(price))
 
 pairs.panels(diamonds[c(1:1000),])
 ```
@@ -441,7 +445,7 @@ t.test(y1, y2, paired=TRUE) # where y1 & y2 are numeric
 t.test(diamonds$price[diamonds$cut%in%c("Good", "Very Good")] 
        factor(diamonds$cut[diamonds$cut%in%c("Good", "Very Good")]))
 
-tTestData <- diamonds %>%                   # %>% = then do ("pipelining")
+tTestData <- diamonds %>%             # %>% = then do ("pipelining")
   filter(cut%in%c("Good", "Very Good"))
 
 t.test(tTestData$price~tTestData$cut)
@@ -472,7 +476,10 @@ summary(myInteraction)
 ## Lineare Modelle
 
 ```{r eval=FALSE}
-myRegression <- lm(price~carat + as.numeric(clarity) + as.numeric(color), data = diamonds)
+myRegression <- lm(price~carat + 
+                     as.numeric(clarity) + 
+                     as.numeric(color), 
+                   data = diamonds)
 summary(myRegression)
 ```
 

@@ -434,7 +434,11 @@ head(diamonds)
 View(diamonds)
 summary(diamonds)
 
-by(diamonds, diamonds[,&quot;cut&quot;], function(x) lm(carat~price, data=x)$coefficients)
+by(diamonds, 
+   diamonds[,&quot;cut&quot;], 
+   function(x) lm(carat~price, data=x)$coefficients)
+
+with(diamonds, mean(price))
 
 pairs.panels(diamonds[c(1:1000),])</pre>
 
@@ -563,7 +567,7 @@ t.test(y1, y2, paired=TRUE) # where y1 &amp; y2 are numeric</pre>
 <pre class = 'prettyprint lang-r'>t.test(diamonds$price[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)] 
        factor(diamonds$cut[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]))
 
-tTestData &lt;- diamonds %&gt;%                   # %&gt;% = then do (&quot;pipelining&quot;)
+tTestData &lt;- diamonds %&gt;%             # %&gt;% = then do (&quot;pipelining&quot;)
   filter(cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;))
 
 t.test(tTestData$price~tTestData$cut)</pre>
@@ -593,7 +597,10 @@ summary(myInteraction)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Lineare Modelle</h2></hgroup><article  id="lineare-modelle-1">
 
-<pre class = 'prettyprint lang-r'>myRegression &lt;- lm(price~carat + as.numeric(clarity) + as.numeric(color), data = diamonds)
+<pre class = 'prettyprint lang-r'>myRegression &lt;- lm(price~carat + 
+                     as.numeric(clarity) + 
+                     as.numeric(color), 
+                   data = diamonds)
 summary(myRegression)</pre>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>7. Gundlegende Programmierkenntnisse</h2></hgroup><article  id="gundlegende-programmierkenntnisse">
