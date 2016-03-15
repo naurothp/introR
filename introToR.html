@@ -563,7 +563,7 @@ t.test(y1, y2, paired=TRUE) # where y1 &amp; y2 are numeric</pre>
 <pre class = 'prettyprint lang-r'>t.test(diamonds$price[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)] 
        factor(diamonds$cut[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]))
 
-tTestData &lt;- diamonds %&gt;%                   # %&gt;% = then (&quot;pipelining&quot;)
+tTestData &lt;- diamonds %&gt;%                   # %&gt;% = then do (&quot;pipelining&quot;)
   filter(cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;))
 
 t.test(tTestData$price~tTestData$cut)</pre>

@@ -441,7 +441,7 @@ t.test(y1, y2, paired=TRUE) # where y1 & y2 are numeric
 t.test(diamonds$price[diamonds$cut%in%c("Good", "Very Good")] 
        factor(diamonds$cut[diamonds$cut%in%c("Good", "Very Good")]))
 
-tTestData <- diamonds %>%                   # %>% = then ("pipelining")
+tTestData <- diamonds %>%                   # %>% = then do ("pipelining")
   filter(cut%in%c("Good", "Very Good"))
 
 t.test(tTestData$price~tTestData$cut)
