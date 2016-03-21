@@ -91,7 +91,17 @@
           </hgroup>
   </slide>
 
-<slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>1. Was ist R?</h2></hgroup><article  id="was-ist-r">
+<slide class=''><hgroup><h2>R ist vielseitig</h2></hgroup><article  id="r-ist-vielseitig">
+
+<ul>
+<li>Datenaufbereitung</li>
+<li>Datenanalyse</li>
+<li>Datenvisualisierung</li>
+<li>Reporting</li>
+<li>Apps (z.B. <a href='https://paternogbc.shinyapps.io/SS_regression/' title=''>https://paternogbc.shinyapps.io/SS_regression/</a>)</li>
+</ul>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>1. Was ist R?</h2></hgroup><article  id="was-ist-r">
 
 </article></slide><slide class=''><hgroup><h2>Zentrale Strukturen</h2></hgroup><article  id="zentrale-strukturen">
 
@@ -654,6 +664,7 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 
 <ul>
 <li>Datenmanipulation 2: <code>reshape2</code></li>
+<li>Grundlegende Programmierstrukturen: ifelse, loops &#8230;</li>
 <li><strong>Grundlegende Statistik:</strong>
 
 <ul>
@@ -676,7 +687,44 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 <li>Latente Modelle / Konfirmatorische Faktorenanalyse: <code>lavaan</code></li>
 <li>Datenvisualisierung 2: <code>lattice</code></li>
 <li>Simulationen mit R</li>
-</ul></article></slide>
+<li>Webapplications with R: <code>shiny</code></li>
+</ul>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>9. Übungsdaten</h2></hgroup><article  id="ubungsdaten">
+
+</article></slide><slide class=''><hgroup><h2>PEW Daten zu Religion und Wissenschaft</h2></hgroup><article  id="pew-daten-zu-religion-und-wissenschaft">
+
+<p><strong>Forschungsfrage: Sagt Religiösität ein konflikthaftes Verhältnis zu Wissenschaft vorher?</strong></p>
+
+<ol>
+<li>Lese die Daten in R ein.</li>
+<li>Erstelle eine Subdatensatz mit folgenden Variablen: <code>q26, sciknow5, age, sex, educ, income, ideo, relig</code></li>
+<li>Überprüfe die Datentypen der Variablen
+
+<ol>
+<li>Ändere die Datentypen für die Analyse</li>
+<li>Beachte missing values</li>
+<li>Rekodiere <code>relig</code> in eine Variable mit den Ausprägungen 0: nicht religiös, 1: religiös</li>
+</ol></li>
+</ol>
+
+</article></slide><slide class=''><hgroup><h2>PEW Daten zu Religion und Wissenschaft</h2></hgroup><article  id="pew-daten-zu-religion-und-wissenschaft-1">
+
+<p><strong>Forschungsfrage: Sagt Religiösität ein konflikthaftes Verhältnis zu Wissenschaft vorher?</strong></p>
+
+<ol>
+<li>Beantworte der Forschungsfrage:
+
+<ol>
+<li>univariat</li>
+<li>multivariat:
+
+<ul>
+<li>unter Beachtung der demographischen Variablen</li>
+<li>unter Beachtung einer Interaktion zwischen Wissen und Religiösität</li>
+</ul></li>
+</ol></li>
+</ol></article></slide>
 
 
   <slide class="backdrop"></slide>

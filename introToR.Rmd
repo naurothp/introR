@@ -9,6 +9,14 @@ output:
   slidy_presentation: default
 ---
 
+## R ist vielseitig
+
+  * Datenaufbereitung
+  * Datenanalyse
+  * Datenvisualisierung
+  * Reporting
+  * Apps (z.B. https://paternogbc.shinyapps.io/SS_regression/)
+
 # 1. Was ist R?
   
 ## Zentrale Strukturen
@@ -521,6 +529,7 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
 ## Potentielle Themen
 
   * Datenmanipulation 2: `reshape2`
+  * Grundlegende Programmierstrukturen: ifelse, loops ...
   * __Grundlegende Statistik:__
     + Häufigkeiten
     + Kreuztabellen
@@ -538,3 +547,28 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
   * Latente Modelle / Konfirmatorische Faktorenanalyse: `lavaan`
   * Datenvisualisierung 2: `lattice`
   * Simulationen mit R
+  * Webapplications with R: `shiny`
+  
+# 9. Übungsdaten
+
+## PEW Daten zu Religion und Wissenschaft
+
+  __Forschungsfrage: Sagt Religiösität ein konflikthaftes Verhältnis zu Wissenschaft vorher?__
+  
+  1. Lese die Daten in R ein.
+  2. Erstelle eine Subdatensatz mit folgenden Variablen: 
+  `q26, sciknow5, age, sex, educ, income, ideo, relig`
+  3. Überprüfe die Datentypen der Variablen
+      a) Ändere die Datentypen für die Analyse
+      b) Beachte missing values
+      c) Rekodiere `relig` in eine Variable mit den Ausprägungen 0: nicht religiös, 1: religiös
+
+## PEW Daten zu Religion und Wissenschaft
+
+  __Forschungsfrage: Sagt Religiösität ein konflikthaftes Verhältnis zu Wissenschaft vorher?__
+  
+  4. Beantworte der Forschungsfrage:
+      a) univariat
+      b) multivariat:
+          - unter Beachtung der demographischen Variablen
+          - unter Beachtung einer Interaktion zwischen Wissen und Religiösität
