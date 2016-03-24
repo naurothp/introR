@@ -111,7 +111,7 @@
 <li>Datenstrukturen &amp; Datentyp
 
 <ul>
-<li>Datentyp (<code>mode()</code>): numeric, character, boolean, factor</li>
+<li>Datentyp (<code>mode()</code>): numeric, character, logical, factor</li>
 <li>Datenstruktur (<code>str()</code>)</li>
 <li><em>Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datenstruktur nicht zur Funktion passen!</em></li>
 </ul></li>
@@ -421,7 +421,7 @@ d &lt;- read.delim2(
 <li>Um SPSS-Files einlesen zu können, brauchen wir ein spezielles Paket</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>install.packages(&quot;foreign&quot;) # install foreign package
+<pre class = 'prettyprint lang-r'>#install.packages(&quot;foreign&quot;) # install foreign package
 library(foreign)        # load the foreign package 
 ?read.spss              # check out the documentation
 myData &lt;- read.spss(&quot;myfile.sav&quot;, to.data.frame=TRUE)</pre>
@@ -551,7 +551,7 @@ arrange(myData, carat, desc(price))</pre>
 <ul>
 <li><code>mutate</code></li>
 <li><code>summarize</code></li>
-<li><code>group by</code></li>
+<li><code>group_by</code></li>
 </ul></li>
 </ul>
 
@@ -560,7 +560,8 @@ arrange(myData, carat, desc(price))</pre>
 </article></slide><slide class=''><hgroup><h2>t-Tests</h2></hgroup><article  id="t-tests">
 
 <pre class = 'prettyprint lang-r'># independent 2-group t-test
-t.test(y~x) # where y is numeric and x is a binary(!) factor
+t.test(y~x) # where y is numeric and 
+            # x is a binary(!) factor
 
 # independent 2-group t-test
 t.test(y1, y2) # where y1 and y2 are numeric
@@ -574,10 +575,12 @@ t.test(y1, y2, paired=TRUE) # where y1 &amp; y2 are numeric</pre>
 
 </article></slide><slide class=''><hgroup><h2>t-Tests</h2></hgroup><article  id="t-tests-1">
 
-<pre class = 'prettyprint lang-r'>t.test(diamonds$price[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)] 
-       factor(diamonds$cut[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]))
+<pre class = 'prettyprint lang-r'>t.test(
+  diamonds$price[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]~ 
+  factor(diamonds$cut[diamonds$cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;)]))
 
-tTestData &lt;- diamonds %&gt;%             # %&gt;% = then do (&quot;pipelining&quot;)
+tTestData &lt;- diamonds %&gt;%             
+  # %&gt;% = then do (&quot;pipelining&quot;)
   filter(cut%in%c(&quot;Good&quot;, &quot;Very Good&quot;))
 
 t.test(tTestData$price~tTestData$cut)</pre>
@@ -631,7 +634,8 @@ summary(myRegression)</pre>
 
 # ----------------- Supplementary Functions
 
-# This is a wrapper for the mean(..., na.rm=TRUE) function
+# This is a wrapper for the 
+#     mean(..., na.rm=TRUE) function
 meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 
 </article></slide><slide class=''><hgroup><h2>Nachvollziehbare Programmierung</h2></hgroup><article  id="nachvollziehbare-programmierung">
@@ -663,8 +667,7 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 </article></slide><slide class=''><hgroup><h2>Potentielle Themen</h2></hgroup><article  id="potentielle-themen">
 
 <ul>
-<li>Datenmanipulation 2: <code>reshape2</code></li>
-<li>Grundlegende Programmierstrukturen: ifelse, loops &#8230;</li>
+<li>Grundlegende Programmierstrukturen (if&#8230; else&#8230;, loops&#8230;) &amp; Datenmanipulation 2: <code>reshape2</code></li>
 <li><strong>Grundlegende Statistik:</strong>
 
 <ul>
@@ -673,7 +676,7 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 <li>Korrelationen: <code>stats</code>, <code>Hmisc</code></li>
 <li>Nicht-parametrische Verfahren</li>
 </ul></li>
-<li><strong>Varianzanalyse</strong>: <code>car</code>, <code>ez</code>, <code>multcomp</code>&#8230;</li>
+<li>Varianzanalyse: <code>car</code>, <code>ez</code>, <code>multcomp</code>&#8230;</li>
 <li><strong>Datenvisualisierung: <code>ggplot2</code></strong></li>
 <li>Skalenanalyse und explorative Faktorenanalyse: z.B. <code>psych</code></li>
 <li>Reporting (RMarkdown) &amp; Version Control Management (GIT)</li>
@@ -688,6 +691,17 @@ meanNA &lt;- function(x) mean(x, na.rm = TRUE)</pre>
 <li>Datenvisualisierung 2: <code>lattice</code></li>
 <li>Simulationen mit R</li>
 <li>Webapplications with R: <code>shiny</code></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Rückfragen</h2></hgroup><article  id="ruckfragen">
+
+<ul>
+<li>Sprechstunde: 20.04. 13h-16h</li>
+<li>Bitte bis 18.04. bei Theo melden:
+
+<ul>
+<li><a href='mailto:schaef58@students.uni-marburg.de' title=''>schaef58@students.uni-marburg.de</a></li>
+</ul></li>
 </ul>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>9. Übungsdaten</h2></hgroup><article  id="ubungsdaten">

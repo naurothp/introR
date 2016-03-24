@@ -2,10 +2,10 @@
 title: "Datenanalysen mit R"
 author: "Peter Nauroth"
 output:
-  ioslides_presentation: default
   beamer_presentation:
     colortheme: whale
     slide_level: 2
+  ioslides_presentation: default
   slidy_presentation: default
 ---
 
@@ -24,7 +24,7 @@ output:
 __R ist eine Programmiersprache__
 
   * Datenstrukturen & Datentyp
-    *	Datentyp (`mode()`): numeric, character, boolean, factor
+    *	Datentyp (`mode()`): numeric, character, logical, factor
     * Datenstruktur (`str()`)
     *	*Viele Fehlermeldungen sind darauf zurückzuführen, dass der Datentyp oder die Datenstruktur nicht zur Funktion passen!*
   * Operatoren (z.B. Zuordnung: `x <- 5`)
@@ -296,7 +296,7 @@ d <- read.delim2(
 * Um SPSS-Files einlesen zu können, brauchen wir ein spezielles Paket
 
 ```{r eval=FALSE}
-install.packages("foreign") # install foreign package
+#install.packages("foreign") # install foreign package
 library(foreign)        # load the foreign package 
 ?read.spss              # check out the documentation
 myData <- read.spss("myfile.sav", to.data.frame=TRUE)
@@ -425,7 +425,7 @@ arrange(myData, carat, desc(price))
   * Andere nützliche Funktionen in `dplyr`
     + `mutate`
     + `summarize`
-    + `group by`
+    + `group_by`
     
 # 6. Gundlegende statistische Verfahren
 
@@ -434,7 +434,8 @@ arrange(myData, carat, desc(price))
 ```{r eval=FALSE}
 
 # independent 2-group t-test
-t.test(y~x) # where y is numeric and x is a binary(!) factor
+t.test(y~x) # where y is numeric and 
+            # x is a binary(!) factor
 
 # independent 2-group t-test
 t.test(y1, y2) # where y1 and y2 are numeric
@@ -450,10 +451,12 @@ t.test(y1, y2, paired=TRUE) # where y1 & y2 are numeric
 
 ```{r eval=FALSE}
 
-t.test(diamonds$price[diamonds$cut%in%c("Good", "Very Good")] 
-       factor(diamonds$cut[diamonds$cut%in%c("Good", "Very Good")]))
+t.test(
+  diamonds$price[diamonds$cut%in%c("Good", "Very Good")]~ 
+  factor(diamonds$cut[diamonds$cut%in%c("Good", "Very Good")]))
 
-tTestData <- diamonds %>%             # %>% = then do ("pipelining")
+tTestData <- diamonds %>%             
+  # %>% = then do ("pipelining")
   filter(cut%in%c("Good", "Very Good"))
 
 t.test(tTestData$price~tTestData$cut)
@@ -505,7 +508,8 @@ summary(myRegression)
 
 # ----------------- Supplementary Functions
 
-# This is a wrapper for the mean(..., na.rm=TRUE) function
+# This is a wrapper for the 
+#     mean(..., na.rm=TRUE) function
 meanNA <- function(x) mean(x, na.rm = TRUE)
 ```
 
@@ -528,14 +532,14 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
 
 ## Potentielle Themen
 
-  * Datenmanipulation 2: `reshape2`
-  * Grundlegende Programmierstrukturen: ifelse, loops ...
+  * Grundlegende Programmierstrukturen (if... else..., loops...) & 
+    Datenmanipulation 2: `reshape2`
   * __Grundlegende Statistik:__
     + Häufigkeiten
     + Kreuztabellen
     + Korrelationen: `stats`, `Hmisc`
     + Nicht-parametrische Verfahren
-  * __Varianzanalyse__: `car`, `ez`, `multcomp`...
+  * Varianzanalyse: `car`, `ez`, `multcomp`...
   * __Datenvisualisierung: `ggplot2`__
   * Skalenanalyse und explorative Faktorenanalyse: z.B. `psych`
   * Reporting (RMarkdown) & Version Control Management (GIT)
@@ -548,6 +552,13 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
   * Datenvisualisierung 2: `lattice`
   * Simulationen mit R
   * Webapplications with R: `shiny`
+  
+  
+## Rückfragen
+
+  * Sprechstunde: 20.04. 13h-16h
+  * Bitte bis 18.04. bei Theo melden:
+    + schaef58@students.uni-marburg.de
   
 # 9. Übungsdaten
 
