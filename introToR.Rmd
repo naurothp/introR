@@ -98,6 +98,8 @@ s + 4
 s * 2
 ```
 
+  * *intern: Vektor mit einem Element*
+
 ## 3.3.1 Homogene Datenstrukturen
 
 __2. Vektoren__
@@ -285,10 +287,10 @@ data <- read.csv(file="data.csv")
 
 * R nutzt "/" oder "\\\\" um Ordner anzusteuern (nicht "\\" wie in Windows üblich):
 ```{r eval=FALSE}
-d <- read.delim2(
+d <- read.csv2(
       "H:/Arbeit/Studien/3-SR-S0/data/data_SR.csv")
 # Or:
-d <- read.delim2(
+d <- read.csv2(
       "H:\\Arbeit\\Studien\\3-SR-S0\\data\\data_SR.csv")
 ```
 
@@ -318,6 +320,7 @@ str(diamonds)
 head(diamonds)
 View(diamonds)
 summary(diamonds)
+glimpse(diamonds)
 
 by(diamonds, 
    diamonds[,"cut"], 
@@ -578,7 +581,7 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
 
   __Forschungsfrage: Sagt Religiösität ein konflikthaftes Verhältnis zu Wissenschaft vorher?__
   
-  4. Beantworte der Forschungsfrage:
+  4. Beantworte die Forschungsfrage:
       a) univariat
       b) multivariat:
           - unter Beachtung der demographischen Variablen
