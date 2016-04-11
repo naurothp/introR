@@ -2,10 +2,10 @@
 title: "Datenanalysen mit R"
 author: "Peter Nauroth"
 output:
+  ioslides_presentation: default
   beamer_presentation:
     colortheme: whale
     slide_level: 2
-  ioslides_presentation: default
   slidy_presentation: default
 ---
 
@@ -76,7 +76,9 @@ __4. Files / Plots / Packages / Help__
   
   * Präzedenz: von 1. zu 3., von links nach rechts
 
-> TODO: Was ergibt der folgende Ausdruck (ohne Nutzung der Konsole!): 
+> TODO: Was ergeben die folgenden Ausdrücke (ohne Nutzung der Konsole!): 
+
+> `(5==6) == (3==4) & (4==4)`
 
 > `(1+2*3 <= 6) | (5==5) == !FALSE`
 
@@ -267,7 +269,7 @@ myMean <- function(x) mean(x, na.rm=TRUE)
 **Für fast alles gibt es bereits Funktionen.**
 
   * Bevor man anfängt eine eigene Funktion zu schreiben lohnt sich eine Suche im Internet:
-    + [StackOverflow](http://www.stackoverflow.de)
+    + [StackOverflow](http://www.stackoverflow.com)
     + [Quick-R](http://www.statmethods.net/)
     + [R-bloggers](http://www.r-bloggers.com/)
 
@@ -555,6 +557,19 @@ meanNA <- function(x) mean(x, na.rm = TRUE)
   * Datenvisualisierung 2: `lattice`
   * Simulationen mit R
   * Webapplications with R: `shiny`
+  
+## Vergabe
+
+
+  * __Grundlegende Statistik__
+    Rene, Sabrina, Natalie, Josi
+    
+  * __Datenvisualisierung 1 / Datenvisualisierung 2__
+    Alina, Wolfgang, Kathleen / Ersin, Nils, Katharina
+    
+  * __Latente Modelle / Konfirmatorische Faktorenanalyse__
+    Frank, Judith, Chris
+
   
   
 ## Rückfragen
